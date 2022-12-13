@@ -46,10 +46,10 @@ a:visited {
 }
 
 @media(max-width: 700px) {
-.info{
-    text-align: center;
-    display: block;
-}
+    .info {
+        text-align: center;
+        display: block;
+    }
 }
 
 .info-text {
