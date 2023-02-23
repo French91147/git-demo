@@ -1,44 +1,31 @@
-"use strict"
+"use strict";
 
-const options = {
-    name: 'test',
-    width: 1024,
-    height: 1024,
-    colors: {
-        border: 'black',
-        bg: 'red'
-    },
-    makeTest: function () {  // метод созданный самостоятельно, а не встроенный в прогу, как // console.log(Object.keys(options).length); что ниже
-        console.log("Test");
-    }
-};
+const arr = [2, 13, 26, 8, 10];
+arr.sort(compareNum);
+console.log(arr);
 
-options.makeTest();
+function compareNum(a, b) { // фун. compareNum сортирует числа по порядку (Этот "алгор. быстрой сортировки" находится внутри метода sort)
+    return a - b;
+}
+// arr.forEach(function (item, i, arr) {  // функция callback - forEach (посмотреть в инете подробней) Нельзя использовать break,continue
+//     console.log(`${i}: ${item}: внутри массива ${arr}`);
+// });
 
-const { border, bg } = options.colors; //диструктуризация
+// arr.pop();
+// arr.push(10);
 
-console.log(border);
+// console.log(arr);
 
-// console.log(Object.keys(options).length); // подсчёт свойств в объекте, не через counter
-
-// console.log(options["colors"]["border"]); //пример объяснения работы for..in, что ниже
-
-// console.log(options.name);
-
-// delete options.name;
-
-// console.log(options);
-
-// let counter = 0;
-// for (let key in options) {  // " for..in  перебор свойств внутри объекта" пройти ещё раз, не всё очевидно.
-//     if (typeof (options[key]) === 'object') {
-//         for (let i in options[key]) {
-//             console.log(`Свойство ${i} имеет значение ${options[key][i]}`);
-//             counter ++;
-//         }
-//     } else {
-//         console.log(`Свойство ${key} имеет значение ${options[key]}`);
-//         counter ++;
-//     }
+// for (let i = 0; i < arr.length; i++) { // Перебор массива
+//     console.log(arr[i]);
 // }
-// console.log(counter);
+
+// for (let value of arr) { // Метод for of - хорош только в массиве. Можно использовать break,continue.
+//     console.log(value);
+// }
+
+// const str = prompt("", ""); // .split переводит строку в массив и существует внутри браузера, те в vscode запустить не можем.
+// const products = str.split(", ");
+// products.sort(); // .sort метод сортировки (СОРТИРУЕТ МАССИВ КАК СТРОКИ)
+// // console.log(products);
+// console.log(products.join('; ')); // .join переводит стоку из массива в строку.
