@@ -14,7 +14,7 @@ console.log(circles);
 const hearts = document.querySelectorAll('.heart'); // посмотреть что такое селектор
 console.log(hearts);
 
-hearts.forEach(item => {  // посмотреть кол бэк
+hearts.forEach(item => {  
     console.log(item);
 });
 
