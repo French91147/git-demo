@@ -1,56 +1,174 @@
-/* Задания на урок:
-
-1) Удалить все рекламные блоки со страницы (правая часть сайта)
-
-2) Изменить жанр фильма, поменять "комедия" на "драма"
-
-3) Изменить задний фон постера с фильмом на изображение "bg.jpg". Оно лежит в папке img.
-Реализовать только при помощи JS
-
-4) Список фильмов на странице сформировать на основании данных из этого JS файла.
-Отсортировать их по алфавиту 
-
-5) Добавить нумерацию выведенных фильмов */
-
 'use strict';
+/* Практическое задание № 2 на урок :
 
-const movieDB = {
-    movies: [
-        "Логан",
-        "Лига справедливости",
-        "Ла-ла лэнд",
-        "Одержимость",
-        "Скотт Пилигрим против..."
-    ]
+1) Автоматизировать вопросы пользователю про фильмы при помощи цикла
+
+2) Сделать так, чтобы пользователь не мог оставить ответ в виде пустой строки,
+отменить ответ или ввести название фильма длинее, чем 50 символов. Если это происходит - 
+возвращаем пользователя к вопросам опять
+
+3) При помощи условий проверить  personalMovieDB.count, и если он меньше 10 - вывести сообщение
+"Просмотрено довольно мало фильмов", если от 10 до 30 - "Вы классический зритель", а если больше - 
+"Вы киноман". А если не подошло ни к одному варианту - "Произошла ошибка"
+
+4) Потренироваться и переписать цикл еще двумя способами while и do*/
+
+// Код возьмите из предыдущего домашнего задания
+
+
+
+const numberOfFilms = +prompt('Сколько фильмов вы уже посмотрели?', "");
+
+const personalMovieDB = {
+    count: numberOfFilms,
+    movies: {},
+    actors: {},
+    genres: [],
+    privat: false
 };
 
 
-const adv = document.querySelectorAll('.promo__adv img'), // adv (обращается =) к document итд
-    poster = document.querySelector('.promo__bg '), // задача 02 и  задача 03
-    genre = poster.querySelector('.promo__genre'),  // задача 02
-    movieList = document.querySelector('.promo__interactive-list'); // задача 04
+for (let i = 0; i < 2; i++) {
+    const a = prompt('Один из последних просмотренных фильмов?', ""),
+        b = prompt('На сколько оцените его?', "");
 
-adv.forEach(item => {   // задача 01 удаление рекламы с помощью forEach
-    item.remove();
-});
+    if (a != "" && b != "" && a != null && b != null && a.length <= 10 && b.length <= 10) {
+        personalMovieDB.movies[a] = b;
+    } else { i-- };           // нужны ли здесь круглые скобки??    
+}
 
-// adv.forEach(function (item) {   // задача 01 удаление рекламы вар 02
-//     item.remove();
-// });
+if (personalMovieDB.count < 10) {                                           // Я ВПИСАЛ ВНУТРЬ FOR ???
+    console.log("Просмотрено довольно мало фильмов");
+} else if (personalMovieDB.count >= 10 || personalMovieDB.count < 30) {  // <= 30 ошибка
+    console.log("Вы классический зритель");
+} else if (personalMovieDB.count >= 30) {  // < 30 ошибка
+    console.log("Вы киноман");
+} else {
+    console.log("Произошла ошибка");
+}
 
-genre.textContent = 'ДРАМА'; // задача 02
+console.log(personalMovieDB);
 
-poster.style.backgroundImage = 'url("img/bg.jpg")'; // задача 03
 
-movieList.innerHTML = ""; // задача 04
+// способ 01 через for
 
-movieDB.movies.sort(); // задача 04
+// const numberOfFilms = +prompt('Сколько фильмов вы уже посмотрели?', "");
 
-movieDB.movies.forEach((film, i) => {   // задача 05
-    movieList.innerHTML += `
-        <li class="promo__interactive-item">${i + 1} ${film}
-            <div class="delete"></div>
-        </li>
-    `;
-});
+// const personalMovieDB = {
+//     count: numberOfFilms,
+//     movies: {},
+//     actors: {},
+//     genres: [],
+//     privat: false
+// };
+
+// for (let i = 0; i < 2; i++) {
+//     const a = prompt('Один из последних просмотренных фильмов?', ""),
+//         b = prompt('На сколько оцените его?', "");
+
+//     if (a != null && b != null && a != "" && b != "" && a.length < 50) {
+//         personalMovieDB.movies[a] = b;
+//         console.log('done');
+//     } else {
+//         console.log("error");
+//         i--;
+//     }
+// }
+
+// if (personalMovieDB.count < 10) {
+//     console.log("Просмотрено довольно мало фильмов"); // задача 03
+// } else if (personalMovieDB.count >= 10 && personalMovieDB.count < 30) {
+//     console.log("Вы классический зритель");
+// } else if (personalMovieDB.count >= 30) {
+//     console.log("Вы киноман");
+// } else {
+//     console.log("Произошла ошибка");
+// }
+
+// console.log(personalMovieDB);
+
+
+
+// способ 02 через while
+
+// const numberOfFilms = +prompt('Сколько фильмов вы уже посмотрели?', "");
+
+// const personalMovieDB = {
+//     count: numberOfFilms,
+//     movies: {},
+//     actors: {},
+//     genres: [],
+//     privat: false
+// };
+
+// let i = 0;
+// while (i < 2) {
+//     const a = prompt('Один из последних просмотренных фильмов?', ""),
+//         b = prompt('На сколько оцените его?', "");
+
+//     if (a != null && b != null && a != '' && b != '' && a.length < 50) {
+//         personalMovieDB.movies[a] = b;
+//         console.log('done');
+//     } else {
+//         console.log('error');
+//         i--;
+//     }
+//     console.log(i);
+//     i++;
+// }
+
+// if (personalMovieDB.count < 10) {
+//     console.log("Просмотрено довольно мало фильмов");
+// } else if (personalMovieDB.count >= 10 && personalMovieDB.count < 30) {
+//     console.log("Вы классический зритель");
+// } else if (personalMovieDB.count >= 30) {
+//     console.log('Вы киноман');
+// } else {
+//     console.log('error');
+// }
+
+// console.log(personalMovieDB);
+
+
+// способ 03 через do
+
+// const numberOfFilms = +prompt('Сколько фильмов вы уже посмотрели?', "");
+
+// const personalMovieDB = {
+//     count: numberOfFilms,
+//     movies: {},
+//     actors: {},
+//     genres: [],
+//     privat: false
+// };
+
+
+// let i = 0;
+// do {
+//     const a = prompt('Один из последних просмотренных фильмов?', ""),
+//         b = prompt('На сколько оцените его?', "");
+
+//     if (a != null && b != null && a != "" && b != "" && a.length < 50) {
+//         personalMovieDB.movies[a] = b;
+//         console.log('done');
+//     } else {
+//         console.log("error");
+//         i--;
+//     }
+//     i++;
+// }
+// while (i < 2);
+
+
+// if (personalMovieDB.count < 10) {
+//     console.log("Просмотрено довольно мало фильмов"); // задача 03
+// } else if (personalMovieDB.count >= 10 && personalMovieDB.count < 30) {
+//     console.log("Вы классический зритель");
+// } else if (personalMovieDB.count >= 30) {
+//     console.log("Вы киноман");
+// } else {
+//     console.log("Произошла ошибка");
+// }
+
+// console.log(personalMovieDB);
 
